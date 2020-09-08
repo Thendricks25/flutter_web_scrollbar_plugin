@@ -101,39 +101,45 @@ class _FlutterWebScrollerState extends State<FlutterWebScroller> {
   @override
   Widget build(BuildContext context) {
     return //Scroll bar
-        Container(
-            alignment: Alignment.centerRight,
-            height: MediaQuery.of(context).size.height,
-            width: widget.scrollBarWidth,
-            margin: EdgeInsets.only(
-                left:
-                    MediaQuery.of(context).size.width - widget.scrollBarWidth),
-            decoration: BoxDecoration(color: widget.scrollBarBackgroundColor),
+        Stack(children: [
+      Container(
+        alignment: Alignment.centerRight,
+        height: MediaQuery.of(context).size.height,
+        width: widget.scrollBarWidth,
+        margin: EdgeInsets.only(
+            left: MediaQuery.of(context).size.width - widget.scrollBarWidth),
+        decoration: BoxDecoration(color: widget.scrollBarBackgroundColor),
+        child: Container(
+          alignment: Alignment.topCenter,
+          child: GestureDetector(
             child: Container(
-              alignment: Alignment.topCenter,
-              child: GestureDetector(
-                child: Container(
-                  height: widget.dragHandleHeight,
-                  width: widget.dragHandleWidth,
-                  margin: EdgeInsets.only(
-                      left: 5.0, right: 5.0, top: _offset, bottom: 5),
-                  decoration: BoxDecoration(
-                      color: widget.dragHandleColor,
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(widget.dragHandleBorderRadius))),
-                ),
-                onVerticalDragUpdate: (dragUpdate) {
-                  /// Send the new drag details to the callback in order to properly update the scrollable content position
-                  widget.scrollCallBack(dragUpdate);
+              height: widget.dragHandleHeight,
+              width: widget.dragHandleWidth,
+              margin: EdgeInsets.only(left: 5.0, right: 5.0, top: _offset),
+              decoration: BoxDecoration(
+                  color: widget.dragHandleColor,
+                  borderRadius: BorderRadius.all(
+                      Radius.circular(widget.dragHandleBorderRadius))),
+            ),
+            onVerticalDragUpdate: (dragUpdate) {
+              /// Send the new drag details to the callback in order to properly update the scrollable content position
+              widget.scrollCallBack(dragUpdate);
 
-                  setState(() {
-                    if (dragUpdate.globalPosition.dy >= 0) {
-                      /// Update the offset of the drag handle to push it down or shift it up
-                      _offset = dragUpdate.globalPosition.dy;
-                    }
-                  });
-                },
-              ),
-            ));
+              setState(() {
+                if (dragUpdate.globalPosition.dy >= 0) {
+                  /// Update the offset of the drag handle to push it down or shift it up
+                  _offset = dragUpdate.globalPosition.dy;
+                }
+              });
+            },
+          ),
+        ),
+      ),
+      Container(
+        alignment: Alignment.bottomCenter,
+        width: widget.scrollBarWidth,
+        height: 5,
+      ),
+    ]);
   }
 }
