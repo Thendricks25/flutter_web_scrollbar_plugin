@@ -116,7 +116,7 @@ class _FlutterWebScrollerState extends State<FlutterWebScroller> {
                   height: widget.dragHandleHeight,
                   width: widget.dragHandleWidth,
                   margin: EdgeInsets.only(
-                      left: 5.0, right: 5.0, top: _offset, bottom: _offset),
+                      left: 5.0, right: 5.0, top: _offset, bottom: 5),
                   decoration: BoxDecoration(
                       color: widget.dragHandleColor,
                       borderRadius: BorderRadius.all(
