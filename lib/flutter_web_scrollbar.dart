@@ -51,15 +51,14 @@ class FlutterWebScrollBar {
       default:
         throw PlatformException(
             code: 'Unimplemented',
-            details: "The flutter_web_scrollbar plugin for web doesn't implement "
+            details:
+                "The flutter_web_scrollbar plugin for web doesn't implement "
                 "the method '${call.method}'");
     }
   }
 }
 
-
 class FlutterWebScroller extends StatefulWidget {
-
   /// Required! CallBack function used to update the scrollable content with the new drag position
   final Function scrollCallBack;
 
@@ -116,7 +115,8 @@ class _FlutterWebScrollerState extends State<FlutterWebScroller> {
                 child: Container(
                   height: widget.dragHandleHeight,
                   width: widget.dragHandleWidth,
-                  margin: EdgeInsets.only(left: 5.0, right: 5.0, top: _offset),
+                  margin: EdgeInsets.only(
+                      left: 5.0, right: 5.0, top: _offset, bottom: _offset),
                   decoration: BoxDecoration(
                       color: widget.dragHandleColor,
                       borderRadius: BorderRadius.all(
